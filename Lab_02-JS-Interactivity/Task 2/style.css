@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.calculator-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 36px 40px;
+    max-width: 450px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #1a1a2e;
+    font-size: 26px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #4361ee;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+button {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+#calculate-btn {
+    background-color: #4361ee;
+    color: #fff;
+}
+
+#calculate-btn:hover {
+    background-color: #3a56d4;
+}
+
+#clear-btn {
+    background-color: #e5e5e5;
+    color: #333;
+}
+
+#clear-btn:hover {
+    background-color: #d4d4d4;
+}
+
+.result {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 18px;
+    border-radius: 10px;
+    display: none;
+    transition: background-color 0.3s;
+}
+
+.result.positive {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.result.negative {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.result.zero {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.error {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #c1121f;
+    min-height: 20px;
+}

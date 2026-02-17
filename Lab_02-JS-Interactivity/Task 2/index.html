@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Interactive Calculator</h1>
+
+        <div class="input-group">
+            <label for="num1">First Number</label>
+            <input type="number" id="num1" placeholder="Enter first number">
+        </div>
+
+        <div class="input-group">
+            <label for="operation">Operation</label>
+            <select id="operation">
+                <option value="add">+ Addition</option>
+                <option value="subtract">- Subtraction</option>
+                <option value="multiply">x Multiplication</option>
+                <option value="divide">÷ Division</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="num2">Second Number</label>
+            <input type="number" id="num2" placeholder="Enter second number">
+        </div>
+
+        <div class="button-group">
+            <button id="calculate-btn" onclick="calculate()">Calculate</button>
+            <button id="clear-btn" onclick="clearAll()">Clear</button>
+        </div>
+
+        <div id="result" class="result"></div>
+        <p id="error" class="error"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
