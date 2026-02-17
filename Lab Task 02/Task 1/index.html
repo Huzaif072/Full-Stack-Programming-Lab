@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Dynamic Quiz</h1>
+
+        <!-- Question 1 -->
+        <div class="question-block">
+            <p class="question-text" id="q1-text"></p>
+            <div class="options" id="q1-options"></div>
+            <p class="feedback" id="q1-feedback"></p>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block">
+            <p class="question-text" id="q2-text"></p>
+            <div class="options" id="q2-options"></div>
+            <p class="feedback" id="q2-feedback"></p>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block">
+            <p class="question-text" id="q3-text"></p>
+            <div class="options" id="q3-options"></div>
+            <p class="feedback" id="q3-feedback"></p>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block">
+            <p class="question-text" id="q4-text"></p>
+            <div class="options" id="q4-options"></div>
+            <p class="feedback" id="q4-feedback"></p>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-block">
+            <p class="question-text" id="q5-text"></p>
+            <div class="options" id="q5-options"></div>
+            <p class="feedback" id="q5-feedback"></p>
+        </div>
+
+        <div class="button-group">
+            <button id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+            <button id="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

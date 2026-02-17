@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .bg-signup {
+            background: linear-gradient(135deg, #eeeeee 0%, #d4d4d4 100%);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-signup p-2 sm:p-4">
+    <div class="bg-white w-full max-w-xl h-auto min-h-[20rem] flex flex-col items-center gap-4 sm:gap-6 py-6 sm:py-8">
+        <div class="w-full">
+            <div class="h-14 mt-4 bg-red-900"></div>
+            <div class="w-24 h-28 mx-auto -mt-20">
+                <img class="w-full h-full" id="logo" alt="logo">
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="text-center px-4 sm:px-8 flex flex-col gap-2">
+            <h1 class="text-base sm:text-xl font-bold">Set up Direct Debit for membership renewal</h1>
+            <p class="text-xs text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+
+        <!-- Your Basic Info -->
+        <div class="w-full flex flex-col">
+            <div class="flex px-4 sm:px-8">
+                <div class="flex-1 rounded-lg bg-gradient-to-r from-[#1a2a4a] to-[#3a5a8a] text-white py-2 px-4">
+                    <h2 class="text-sm font-bold">Your Basic Info</h2>
+                </div>
+            </div>
+            <div class="px-4 sm:px-8 py-5 flex flex-col gap-3">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">Title <span class="text-red-500">*</span></label>
+                    <div class="relative flex-1">
+                        <select class="w-full bg-gray-200 rounded-lg py-2 px-4 pr-8 text-xs border-none outline-none appearance-none focus:ring-1 focus:ring-[#2c3e6b]">
+                            <option value=""></option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Ms">Ms</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Dr">Dr</option>
+                        </select>
+                        <span class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-[10px]">&#9660;</span>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">First name(s) <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">Last name <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Your contact details -->
+        <div class="w-full flex flex-col">
+            <div class="flex px-4 sm:px-8">
+                <div class="flex-1 rounded-lg bg-gradient-to-r from-[#1a2a4a] to-[#3a5a8a] text-white py-2 px-4">
+                    <h2 class="text-sm font-bold">Your contact details</h2>
+                </div>
+            </div>
+            <div class="px-4 sm:px-8 py-5 flex flex-col gap-3">
+                <p class="text-sm text-gray-600">Please provide your telephone number (including area code) and your email address.</p>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-44 sm:text-right shrink-0">Contact number <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-44 sm:text-right shrink-0">Alternative contact number</label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-44 sm:text-right shrink-0">Email address <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-44 sm:text-right shrink-0">Confirm email address <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Your account address -->
+        <div class="w-full flex flex-col">
+            <div class="flex px-4 sm:px-8">
+                <div class="flex-1 rounded-lg bg-gradient-to-r from-[#1a2a4a] to-[#3a5a8a] text-white py-2 px-4">
+                    <h2 class="text-sm font-bold">Your account address</h2>
+                </div>
+            </div>
+            <div class="px-4 sm:px-8 py-5 flex flex-col gap-3">
+                <p class="text-sm text-gray-600">Please provide your Bank Account address..</p>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">Postcode <span class="text-red-500">*</span></label>
+                    <div class="flex gap-2">
+                        <input type="text" class="w-32 sm:w-36 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                        <input type="text" class="w-24 sm:w-28 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">Address line 1 <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">Address line 2</label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">Town <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-28 sm:text-right shrink-0">County</label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Your bank details -->
+        <div class="w-full flex flex-col">
+            <div class="flex px-4 sm:px-8">
+                <div class="flex-1 rounded-lg bg-gradient-to-r from-[#1a2a4a] to-[#3a5a8a] text-white py-2 px-4">
+                    <h2 class="text-sm font-bold">Your bank details</h2>
+                </div>
+            </div>
+            <div class="px-4 sm:px-8 py-5 flex flex-col gap-3">
+                <p class="text-sm text-gray-600">This is the bank account from where the Direct Debit payments will be taken.</p>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-40 sm:text-right shrink-0">Account holder name <span class="text-red-500">*</span></label>
+                    <input type="text" class="flex-1 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-40 sm:text-right shrink-0">Sort code <span class="text-red-500">*</span></label>
+                    <div class="flex gap-2">
+                        <input type="text" maxlength="2" class="w-12 h-8 bg-gray-200 rounded py-1 px-2 text-xs text-center border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                        <input type="text" maxlength="2" class="w-12 h-8 bg-gray-200 rounded py-1 px-2 text-xs text-center border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                        <input type="text" maxlength="2" class="w-12 h-8 bg-gray-200 rounded py-1 px-2 text-xs text-center border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <label class="text-xs text-gray-700 sm:w-40 sm:text-right shrink-0">Account number <span class="text-red-500">*</span></label>
+                    <input type="text" class="w-full sm:w-64 bg-gray-200 rounded-lg py-2 px-4 text-xs border-none outline-none focus:ring-1 focus:ring-[#2c3e6b]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Check Out Button -->
+        <div class="w-full px-4 sm:px-8 flex justify-end pb-4">
+            <button id="checkoutBtn" class="bg-[#1a2a4a] text-white text-sm font-bold py-3 px-8 hover:bg-[#0f1d36] transition-colors">
+                Check Out
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

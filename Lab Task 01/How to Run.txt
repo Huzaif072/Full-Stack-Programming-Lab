@@ -1,0 +1,8 @@
+Step 1: Install Packages
+npm install
+
+Step 2: Build the Project
+npm run build
+
+Step 3: Run the Server
+npm run server
