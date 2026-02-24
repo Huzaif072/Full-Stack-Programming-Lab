@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5 - Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 450px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .error-msg {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 4px;
+            min-height: 18px;
+        }
+
+        .success-msg {
+            text-align: center;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            min-height: 22px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #007bff;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #0069d9;
+        }
+
+        .input-error {
+            border-color: #dc3545 !important;
+        }
+
+        .input-success {
+            border-color: #28a745 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+
+        <form id="registrationForm" onsubmit="return handleSubmit(event)">
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name" />
+                <div class="error-msg" id="nameError"></div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Enter your email" />
+                <div class="error-msg" id="emailError"></div>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" placeholder="Enter your age" />
+                <div class="error-msg" id="ageError"></div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" />
+                <div class="error-msg" id="passwordError"></div>
+            </div>
+
+            <button type="submit" class="submit-btn">Register</button>
+
+            <div class="success-msg" id="successMsg"></div>
+        </form>
+    </div>
+
+    <script>
+        // Validate Name: should not be empty
+        function validateName() {
+            var name = document.getElementById("name").value.trim();
+            var errorDiv = document.getElementById("nameError");
+            var input = document.getElementById("name");
+
+            if (name === "") {
+                errorDiv.textContent = "Name should not be empty.";
+                input.classList.add("input-error");
+                input.classList.remove("input-success");
+                return false;
+            } else {
+                errorDiv.textContent = "";
+                input.classList.remove("input-error");
+                input.classList.add("input-success");
+                return true;
+            }
+        }
+
+        // Validate Email: must contain @
+        function validateEmail() {
+            var email = document.getElementById("email").value.trim();
+            var errorDiv = document.getElementById("emailError");
+            var input = document.getElementById("email");
+
+            if (email.indexOf("@") === -1) {
+                errorDiv.textContent = "Email must contain '@'.";
+                input.classList.add("input-error");
+                input.classList.remove("input-success");
+                return false;
+            } else {
+                errorDiv.textContent = "";
+                input.classList.remove("input-error");
+                input.classList.add("input-success");
+                return true;
+            }
+        }
+
+        // Validate Age: must be between 18 and 60
+        function validateAge() {
+            var age = document.getElementById("age").value.trim();
+            var errorDiv = document.getElementById("ageError");
+            var input = document.getElementById("age");
+
+            if (age === "" || age < 18 || age > 60) {
+                errorDiv.textContent = "Age must be between 18 and 60.";
+                input.classList.add("input-error");
+                input.classList.remove("input-success");
+                return false;
+            } else {
+                errorDiv.textContent = "";
+                input.classList.remove("input-error");
+                input.classList.add("input-success");
+                return true;
+            }
+        }
+
+        // Validate Password: minimum length 6
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var errorDiv = document.getElementById("passwordError");
+            var input = document.getElementById("password");
+
+            if (password.length < 6) {
+                errorDiv.textContent = "Password must be at least 6 characters long.";
+                input.classList.add("input-error");
+                input.classList.remove("input-success");
+                return false;
+            } else {
+                errorDiv.textContent = "";
+                input.classList.remove("input-error");
+                input.classList.add("input-success");
+                return true;
+            }
+        }
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Clear previous success message
+            document.getElementById("successMsg").textContent = "";
+
+            // Validate each field individually using functions and conditionals
+            var isNameValid = validateName();
+            var isEmailValid = validateEmail();
+            var isAgeValid = validateAge();
+            var isPasswordValid = validatePassword();
+
+            // Check if all validations pass
+            if (isNameValid && isEmailValid && isAgeValid && isPasswordValid) {
+                // Show success message dynamically using DOM
+                document.getElementById("successMsg").textContent = "All fields are valid! Submitting...";
+
+                // Confirm submission using confirm()
+                var userConfirmed = confirm("All details are correct. Do you want to submit the form?");
+
+                if (userConfirmed) {
+                    // Bonus: Use alert() for additional interaction after submission
+                    var userName = document.getElementById("name").value.trim();
+                    alert("Thank you, " + userName + "! Your registration was successful.");
+
+                    // Bonus: Use prompt() for extra interaction
+                    var feedback = prompt("Any feedback about the registration process?");
+                    if (feedback !== null && feedback.trim() !== "") {
+                        alert("Thanks for your feedback: \"" + feedback + "\"");
+                    } else {
+                        alert("No feedback provided. Welcome aboard!");
+                    }
+
+                    // Reset form
+                    document.getElementById("registrationForm").reset();
+
+                    // Clear all styling using a loop
+                    var inputs = document.querySelectorAll(".form-group input");
+                    for (var i = 0; i < inputs.length; i++) {
+                        inputs[i].classList.remove("input-success", "input-error");
+                    }
+
+                    document.getElementById("successMsg").textContent = "Registration complete!";
+                } else {
+                    document.getElementById("successMsg").textContent = "Submission cancelled.";
+                }
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>
