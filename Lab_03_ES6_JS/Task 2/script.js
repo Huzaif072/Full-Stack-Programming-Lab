@@ -26,11 +26,6 @@ let output = `
         <p><strong>Total Items:</strong> ${updatedCart.length}</p>
     </div>
     <div class="section">
-        <h3>Updated Cart (added more items)</h3>
-        <p>${updatedCart.join(", ")}</p>
-        <p><strong>Total Items:</strong> ${updatedCart.length}</p>
-    </div>
-    <div class="section">
          <h3>Destructured Results</h3>
          <p><strong>First Item:</strong> ${firstItem}</p>
          <p><strong>Remaining Items:</strong> ${remainingItems.join(", ")}</p>
