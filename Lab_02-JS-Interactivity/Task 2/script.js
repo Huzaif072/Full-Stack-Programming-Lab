@@ -1,4 +1,3 @@
-// Get DOM elements
 var num1Input = document.getElementById("num1");
 var num2Input = document.getElementById("num2");
 var operationSelect = document.getElementById("operation");
@@ -6,7 +5,6 @@ var resultDiv = document.getElementById("result");
 var errorMsg = document.getElementById("error");
 
 
-// Function to validate inputs
 function validateInputs(value1, value2, operation) {
     // Check if inputs are empty
     if (value1 === "" || value2 === "") {
