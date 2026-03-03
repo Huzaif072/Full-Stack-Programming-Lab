@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1 - Dynamic List Manager</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #itemInput {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        #addBtn {
+            padding: 8px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #addBtn:hover {
+            background-color: #45a049;
+        }
+        #itemList {
+            list-style: none;
+            padding: 0;
+        }
+        #itemList li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic List Manager</h1>
+    <div class="input-section">
+        <input type="text" id="itemInput" placeholder="Enter an item...">
+        <button id="addBtn">Add</button>
+    </div>
+    <ul id="itemList"></ul>
+
+    <script>
+        $(document).ready(function () {
+            // Add item on button click
+            $("#addBtn").click(function () {
+                addItem();
+            });
+
+            // Add item on Enter key
+            $("#itemInput").keypress(function (e) {
+                if (e.which === 13) {
+                    addItem();
+                }
+            });
+
+            function addItem() {
+                var text = $.trim($("#itemInput").val());
+                if (text === "") {
+                    alert("Please enter an item.");
+                    return;
+                }
+
+                var li = $("<li></li>").text(text);
+                var deleteBtn = $('<button class="delete-btn">Delete</button>');
+                li.append(deleteBtn);
+                li.hide();
+                $("#itemList").append(li);
+                li.fadeIn(300);
+                $("#itemInput").val("").focus();
+            }
+
+            // Delete item using event delegation
+            $("#itemList").on("click", ".delete-btn", function () {
+                $(this).parent().fadeOut(300, function () {
+                    $(this).remove();
+                });
+            });
+
+            // Highlight on hover
+            $("#itemList").on("mouseenter", "li", function () {
+                $(this).css("background-color", "#d4edda");
+            });
+
+            $("#itemList").on("mouseleave", "li", function () {
+                $(this).css("background-color", "#f4f4f4");
+            });
+        });
+    </script>
+</body>
+</html>

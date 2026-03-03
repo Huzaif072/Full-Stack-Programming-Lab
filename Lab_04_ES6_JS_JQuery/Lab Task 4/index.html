@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4 - Tabbed Content with Smooth Scroll</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: #f0f0f0;
+            border: 2px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tab-btn:hover {
+            background-color: #e0e0e0;
+        }
+        .tab-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 5px 5px 5px;
+            margin-bottom: 30px;
+            background-color: #fafafa;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-content h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .tab-content p {
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabbed Content</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-target="#tab1">Home</button>
+        <button class="tab-btn" data-target="#tab2">About</button>
+        <button class="tab-btn" data-target="#tab3">Services</button>
+        <button class="tab-btn" data-target="#tab4">Portfolio</button>
+        <button class="tab-btn" data-target="#tab5">Contact</button>
+    </div>
+
+    <div class="tab-content active" id="tab1">
+        <h2>Home</h2>
+        <p>Welcome to our website! This is the homepage section. Here you will find a brief overview of what we offer and the latest updates.</p>
+    </div>
+
+    <div class="tab-content" id="tab2">
+        <h2>About Us</h2>
+        <p>We are a team of passionate developers building great web applications. Our mission is to deliver high-quality solutions that make a difference.</p>
+    </div>
+
+    <div class="tab-content" id="tab3">
+        <h2>Our Services</h2>
+        <p>We offer web development, mobile app development, UI/UX design, and cloud hosting services. Let us help bring your ideas to life.</p>
+    </div>
+
+    <div class="tab-content" id="tab4">
+        <h2>Portfolio</h2>
+        <p>Check out our recent projects including e-commerce platforms, social media apps, and enterprise management systems.</p>
+    </div>
+
+    <div class="tab-content" id="tab5">
+        <h2>Contact</h2>
+        <p>Reach out to us at contact@example.com or call us at +92-3123456783. We'd love to hear from you!</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".tab-btn").click(function () {
+                $(".tab-btn").removeClass("active");
+                $(".tab-content").removeClass("active").hide();
+
+                $(this).addClass("active");
+
+                var target = $(this).data("target");
+                $(target).addClass("active").fadeIn(400);
+
+                $("html, body").animate({
+                    scrollTop: $(target).offset().top - 20
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

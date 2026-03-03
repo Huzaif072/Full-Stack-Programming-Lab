@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3 - Interactive Form Validation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input.error, textarea.error {
+            border-color: #e74c3c;
+            background-color: #fdecea;
+        }
+        input.valid, textarea.valid {
+            border-color: #2ecc71;
+            background-color: #eafaf1;
+        }
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+        #submitBtn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #submitBtn:hover {
+            background-color: #2980b9;
+        }
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form id="myForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            <div class="error-msg" id="nameError">Name is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Enter your email">
+            <div class="error-msg" id="emailError">Please enter a valid email.</div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter password (min 6 chars)">
+            <div class="error-msg" id="passwordError">Password must be at least 6 characters.</div>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="3" placeholder="Enter a message"></textarea>
+            <div class="error-msg" id="messageError">Message is required.</div>
+        </div>
+        <button type="submit" id="submitBtn">Submit</button>
+    </form>
+    <div class="success-message" id="successMsg">Form submitted successfully!</div>
+
+    <script>
+        $(document).ready(function () {
+
+            // Validate a single field, returns true if valid
+            function validateField(field) {
+                var id = field.attr("id");
+                var val = $.trim(field.val());
+                var isValid = true;
+
+                if (id === "name") {
+                    isValid = val.length > 0;
+                } else if (id === "email") {
+                    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    isValid = emailPattern.test(val);
+                } else if (id === "password") {
+                    isValid = val.length >= 6;
+                } else if (id === "message") {
+                    isValid = val.length > 0;
+                }
+
+                var errorMsg = $("#" + id + "Error");
+
+                if (!isValid) {
+                    field.removeClass("valid").addClass("error");
+                    errorMsg.slideDown(200);
+                } else {
+                    field.removeClass("error").addClass("valid");
+                    errorMsg.slideUp(200);
+                }
+
+                return isValid;
+            }
+
+            // Validate on blur
+            $("#myForm input, #myForm textarea").on("blur", function () {
+                validateField($(this));
+            });
+
+            // Submit form
+            $("#myForm").on("submit", function (e) {
+                e.preventDefault();
+
+                var allValid = true;
+                $("#myForm input, #myForm textarea").each(function () {
+                    if (!validateField($(this))) {
+                        allValid = false;
+                    }
+                });
+
+                if (allValid) {
+                    $("#successMsg").fadeIn(400);
+                    // Reset form after success
+                    setTimeout(function () {
+                        $("#myForm")[0].reset();
+                        $("#myForm input, #myForm textarea").removeClass("valid error");
+                        $("#successMsg").fadeOut(400);
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

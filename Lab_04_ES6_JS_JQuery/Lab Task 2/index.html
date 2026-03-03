@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2 - Animated Image Gallery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .gallery {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            background-color: #000;
+            border-radius: 8px;
+        }
+        .gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .gallery img.active {
+            display: block;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            min-height: 30px;
+        }
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .controls button {
+            padding: 10px 25px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Animated Image Gallery</h1>
+    <div class="gallery">
+        <img src="https://picsum.photos/id/10/600/350" class="active" data-caption="Beautiful Landscape">
+        <img src="https://picsum.photos/id/20/600/350" data-caption="Forest Road">
+        <img src="https://picsum.photos/id/30/600/350" data-caption="Misty Mountains">
+        <img src="https://picsum.photos/id/40/600/350" data-caption="Ocean Waves">
+        <img src="https://picsum.photos/id/50/600/350" data-caption="City Lights">
+    </div>
+    <div class="caption">Beautiful Landscape</div>
+    <div class="controls">
+        <button id="prevBtn">&#9664; Previous</button>
+        <button id="nextBtn">Next &#9654;</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var currentIndex = 0;
+            var images = $(".gallery img");
+            var totalImages = images.length;
+
+            function showImage(index) {
+                // Fade out current image, then fade in the new one
+                images.filter(".active")
+                    .fadeOut(400)
+                    .removeClass("active");
+
+                $(images[index])
+                    .fadeIn(400)
+                    .addClass("active");
+
+                // Update caption with fade effect
+                var captionText = $(images[index]).data("caption");
+                $(".caption").fadeOut(200, function () {
+                    $(this).text(captionText).fadeIn(200);
+                });
+            }
+
+            $("#nextBtn").click(function () {
+                currentIndex = (currentIndex + 1) % totalImages;
+                showImage(currentIndex);
+            });
+
+            $("#prevBtn").click(function () {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                showImage(currentIndex);
+            });
+        });
+    </script>
+</body>
+</html>
