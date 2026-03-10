@@ -1,0 +1,32 @@
+.student-card {
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.student-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.student-name {
+  margin: 0 0 16px 0;
+  font-size: 1.4rem;
+  color: #333;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 8px;
+}
+
+.student-details p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.student-details span {
+  font-weight: 600;
+  color: #333;
+}
