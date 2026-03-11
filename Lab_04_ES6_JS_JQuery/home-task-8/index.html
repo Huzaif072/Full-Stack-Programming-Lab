@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Task 8 - Quiz Game</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 550px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .quiz-container {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            background-color: #fafafa;
+        }
+        .progress {
+            text-align: center;
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .options li:hover {
+            background-color: #eaf2f8;
+            border-color: #3498db;
+        }
+        .options li.selected {
+            background-color: #d4edda;
+            border-color: #27ae60;
+        }
+        .options li.correct {
+            background-color: #d4edda;
+            border-color: #27ae60;
+        }
+        .options li.wrong {
+            background-color: #fdecea;
+            border-color: #e74c3c;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .nav-buttons button {
+            padding: 10px 24px;
+            font-size: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        #prevBtn {
+            background-color: #95a5a6;
+        }
+        #nextBtn {
+            background-color: #3498db;
+        }
+        .nav-buttons button:hover {
+            opacity: 0.85;
+        }
+        .nav-buttons button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        .result h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+        .score-text {
+            color: #555;
+            font-size: 16px;
+        }
+        #restartBtn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #restartBtn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Game</h1>
+    <div class="quiz-container">
+        <div id="quizArea">
+            <div class="progress" id="progress"></div>
+            <div class="question" id="question"></div>
+            <ul class="options" id="options"></ul>
+            <div class="nav-buttons">
+                <button id="prevBtn">Previous</button>
+                <button id="nextBtn">Next</button>
+            </div>
+        </div>
+        <div class="result" id="resultArea">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="scoreValue"></div>
+            <div class="score-text" id="scoreText"></div>
+            <button id="restartBtn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var questions = [
+                {
+                    question: "What does HTML stand for?",
+                    options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"],
+                    answer: 0
+                },
+                {
+                    question: "Which symbol is used for ID selector in CSS?",
+                    options: [".", "*", "#", "@"],
+                    answer: 2
+                },
+                {
+                    question: "Which company developed JavaScript?",
+                    options: ["Microsoft", "Netscape", "Google", "Apple"],
+                    answer: 1
+                },
+                {
+                    question: "What does CSS stand for?",
+                    options: ["Computer Style Sheets", "Cascading Style Sheets", "Creative Style System", "Colorful Style Sheets"],
+                    answer: 1
+                },
+                {
+                    question: "Which jQuery method is used to hide an element?",
+                    options: [".remove()", ".hidden()", ".hide()", ".close()"],
+                    answer: 2
+                }
+            ];
+
+            var currentQuestion = 0;
+            var userAnswers = new Array(questions.length).fill(-1);
+
+            function showQuestion() {
+                var q = questions[currentQuestion];
+                $("#progress").text("Question " + (currentQuestion + 1) + " of " + questions.length);
+                $("#question").text(q.question);
+
+                var optionsList = $("#options");
+                optionsList.empty();
+
+                $.each(q.options, function (i, option) {
+                    var li = $("<li></li>").text(option).attr("data-index", i);
+                    if (userAnswers[currentQuestion] === i) {
+                        li.addClass("selected");
+                    }
+                    optionsList.append(li);
+                });
+
+                // Update buttons
+                $("#prevBtn").prop("disabled", currentQuestion === 0);
+                if (currentQuestion === questions.length - 1) {
+                    $("#nextBtn").text("Finish");
+                } else {
+                    $("#nextBtn").text("Next");
+                }
+
+                $("#question").hide().fadeIn(300);
+                $("#options").hide().fadeIn(300);
+            }
+
+            $("#options").on("click", "li", function () {
+                var index = parseInt($(this).attr("data-index"));
+                userAnswers[currentQuestion] = index;
+                $("#options li").removeClass("selected");
+                $(this).addClass("selected");
+            });
+
+            $("#nextBtn").click(function () {
+                if (userAnswers[currentQuestion] === -1) {
+                    alert("Please select an answer.");
+                    return;
+                }
+
+                if (currentQuestion === questions.length - 1) {
+                    showResult();
+                } else {
+                    currentQuestion++;
+                    showQuestion();
+                }
+            });
+
+            $("#prevBtn").click(function () {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion();
+                }
+            });
+
+            function showResult() {
+                var score = 0;
+                $.each(questions, function (i, q) {
+                    if (userAnswers[i] === q.answer) {
+                        score++;
+                    }
+                });
+
+                $("#quizArea").fadeOut(300, function () {
+                    $("#scoreValue").text(score + " / " + questions.length);
+                    var percent = Math.round((score / questions.length) * 100);
+                    $("#scoreText").text("You scored " + percent + "%");
+
+                    if (percent >= 80) {
+                        $(".score").css("color", "#27ae60");
+                    } else if (percent >= 50) {
+                        $(".score").css("color", "#f39c12");
+                    } else {
+                        $(".score").css("color", "#e74c3c");
+                    }
+
+                    $("#resultArea").fadeIn(400);
+                });
+            }
+
+            $("#restartBtn").click(function () {
+                currentQuestion = 0;
+                userAnswers = new Array(questions.length).fill(-1);
+                $("#resultArea").fadeOut(300, function () {
+                    showQuestion();
+                    $("#quizArea").fadeIn(300);
+                });
+            });
+
+            showQuestion();
+        });
+    </script>
+</body>
+</html>
