@@ -1,0 +1,121 @@
+.form-wrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
+.form-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  padding: 30px;
+  text-align: center;
+  color: white;
+}
+
+.form-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.form-header p {
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.form-body {
+  padding: 36px 30px;
+}
+
+.input-group {
+  margin-bottom: 22px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #2d3748;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #4facfe;
+}
+
+.input-group input::placeholder {
+  color: #a0aec0;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  margin-top: 8px;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.result-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px 30px;
+  margin-top: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #48bb78;
+}
+
+.result-card h3 {
+  color: #2d3748;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+.result-row {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-weight: 600;
+  color: #718096;
+  min-width: 60px;
+  font-size: 0.9rem;
+}
+
+.result-value {
+  color: #2d3748;
+  font-size: 0.95rem;
+  word-break: break-all;
+}

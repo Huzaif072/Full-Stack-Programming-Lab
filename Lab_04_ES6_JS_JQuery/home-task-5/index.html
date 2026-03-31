@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Task 5 - Chained Style Editor</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #textBlock {
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            transition: all 0.3s;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .controls button {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        #increaseFont { background-color: #3498db; }
+        #decreaseFont { background-color: #2980b9; }
+        #colorRed { background-color: #e74c3c; }
+        #colorGreen { background-color: #27ae60; }
+        #colorBlue { background-color: #2980b9; }
+        #bgYellow { background-color: #f1c40f; color: #333; }
+        #bgLight { background-color: #ecf0f1; color: #333; }
+        #toggleBold { background-color: #8e44ad; }
+        #toggleItalic { background-color: #e67e22; }
+        #resetAll { background-color: #95a5a6; }
+        .controls button:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <h1>Chained Style Editor</h1>
+    <div id="textBlock">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+    </div>
+    <div class="controls">
+        <button id="increaseFont">Font +</button>
+        <button id="decreaseFont">Font -</button>
+        <button id="colorRed">Red Text</button>
+        <button id="colorGreen">Green Text</button>
+        <button id="colorBlue">Blue Text</button>
+        <button id="bgYellow">Yellow BG</button>
+        <button id="bgLight">Light BG</button>
+        <button id="toggleBold">Toggle Bold</button>
+        <button id="toggleItalic">Toggle Italic</button>
+        <button id="resetAll">Reset</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var currentSize = 16;
+
+            $("#increaseFont").click(function () {
+                currentSize += 2;
+                $("#textBlock").css("font-size", currentSize + "px").css("transition", "all 0.3s");
+            });
+
+            $("#decreaseFont").click(function () {
+                if (currentSize > 10) currentSize -= 2;
+                $("#textBlock").css("font-size", currentSize + "px").css("transition", "all 0.3s");
+            });
+
+            $("#colorRed").click(function () {
+                $("#textBlock").css("color", "#e74c3c").css("transition", "all 0.3s");
+            });
+
+            $("#colorGreen").click(function () {
+                $("#textBlock").css("color", "#27ae60").css("transition", "all 0.3s");
+            });
+
+            $("#colorBlue").click(function () {
+                $("#textBlock").css("color", "#2980b9").css("transition", "all 0.3s");
+            });
+
+            $("#bgYellow").click(function () {
+                $("#textBlock").css("background-color", "#fff9c4").css("border-color", "#f1c40f");
+            });
+
+            $("#bgLight").click(function () {
+                $("#textBlock").css("background-color", "#ecf0f1").css("border-color", "#bdc3c7");
+            });
+
+            $("#toggleBold").click(function () {
+                var current = $("#textBlock").css("font-weight");
+                var newWeight = (current === "700" || current === "bold") ? "normal" : "bold";
+                $("#textBlock").css("font-weight", newWeight);
+            });
+
+            $("#toggleItalic").click(function () {
+                var current = $("#textBlock").css("font-style");
+                var newStyle = (current === "italic") ? "normal" : "italic";
+                $("#textBlock").css("font-style", newStyle);
+            });
+
+            $("#resetAll").click(function () {
+                currentSize = 16;
+                $("#textBlock")
+                    .css("font-size", "16px")
+                    .css("color", "#000")
+                    .css("background-color", "#fff")
+                    .css("border-color", "#ccc")
+                    .css("font-weight", "normal")
+                    .css("font-style", "normal");
+            });
+        });
+    </script>
+</body>
+</html>

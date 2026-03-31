@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Task 6 - API Data Fetcher</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #postList {
+            list-style: none;
+            padding: 0;
+        }
+        #postList li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        #postList li strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        #postList li p {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+        #loadMoreBtn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #loadMoreBtn:hover {
+            background-color: #2980b9;
+        }
+        #loadMoreBtn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .loading {
+            text-align: center;
+            padding: 10px;
+            color: #777;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Data Fetcher</h1>
+    <ul id="postList"></ul>
+    <div class="loading" id="loading">Loading...</div>
+    <button id="loadMoreBtn">Load Posts</button>
+
+    <script>
+        $(document).ready(function () {
+            var page = 1;
+            var limit = 5;
+            var totalPosts = 100; 
+
+            function fetchPosts() {
+                $("#loading").show();
+                $("#loadMoreBtn").prop("disabled", true);
+
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/posts",
+                    method: "GET",
+                    data: {
+                        _page: page,
+                        _limit: limit
+                    },
+                    success: function (posts) {
+                        $.each(posts, function (index, post) {
+                            var li = $("<li></li>").hide();
+                            li.append("<strong>" + post.id + ". " + post.title + "</strong>");
+                            li.append("<p>" + post.body + "</p>");
+                            $("#postList").append(li);
+                            li.fadeIn(300);
+                        });
+
+                        page++;
+
+                        if ((page - 1) * limit >= totalPosts) {
+                            $("#loadMoreBtn").text("No More Posts").prop("disabled", true);
+                        } else {
+                            $("#loadMoreBtn").text("Load More").prop("disabled", false);
+                        }
+                    },
+                    error: function () {
+                        alert("Failed to fetch data. Please try again.");
+                        $("#loadMoreBtn").prop("disabled", false);
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+                });
+            }
+
+            $("#loadMoreBtn").click(function () {
+                fetchPosts();
+            });
+        });
+    </script>
+</body>
+</html>

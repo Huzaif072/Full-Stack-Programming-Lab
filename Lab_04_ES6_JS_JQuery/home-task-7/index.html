@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Task 7 - Drag-and-Drop Sortable List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        p.info {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+        #sortableList {
+            list-style: none;
+            padding: 0;
+        }
+        #sortableList li {
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            background-color: #f4f4f4;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: grab;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+        }
+        #sortableList li:active {
+            cursor: grabbing;
+        }
+        #sortableList li.dragging {
+            background-color: #d5f5e3;
+            border-color: #27ae60;
+            opacity: 0.8;
+        }
+        #sortableList li.over {
+            border-color: #3498db;
+            border-style: dashed;
+        }
+        .order-num {
+            background-color: #3498db;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Drag-and-Drop Sortable List</h1>
+    <p class="info">Drag items to reorder them</p>
+    <ul id="sortableList">
+        <li draggable="true"><span class="order-num">1</span> Learn HTML</li>
+        <li draggable="true"><span class="order-num">2</span> Learn CSS</li>
+        <li draggable="true"><span class="order-num">3</span> Learn JavaScript</li>
+        <li draggable="true"><span class="order-num">4</span> Learn jQuery</li>
+        <li draggable="true"><span class="order-num">5</span> Learn React</li>
+    </ul>
+
+    <script>
+        $(document).ready(function () {
+            var draggedItem = null;
+
+            function updateNumbers() {
+                $("#sortableList li").each(function (index) {
+                    $(this).find(".order-num").text(index + 1);
+                });
+            }
+
+            $("#sortableList").on("dragstart", "li", function (e) {
+                draggedItem = this;
+                $(this).addClass("dragging");
+                e.originalEvent.dataTransfer.effectAllowed = "move";
+            });
+
+            $("#sortableList").on("dragend", "li", function () {
+                $(this).removeClass("dragging");
+                $("#sortableList li").removeClass("over");
+                draggedItem = null;
+            });
+
+            $("#sortableList").on("dragover", "li", function (e) {
+                e.preventDefault();
+                e.originalEvent.dataTransfer.dropEffect = "move";
+                if (this !== draggedItem) {
+                    $(this).addClass("over");
+                }
+            });
+
+            $("#sortableList").on("dragleave", "li", function () {
+                $(this).removeClass("over");
+            });
+
+            $("#sortableList").on("drop", "li", function (e) {
+                e.preventDefault();
+                $(this).removeClass("over");
+
+                if (this !== draggedItem) {
+                    var allItems = $("#sortableList li");
+                    var draggedIndex = allItems.index(draggedItem);
+                    var droppedIndex = allItems.index(this);
+
+                    if (draggedIndex < droppedIndex) {
+                        $(draggedItem).insertAfter(this);
+                    } else {
+                        $(draggedItem).insertBefore(this);
+                    }
+
+                    updateNumbers();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
